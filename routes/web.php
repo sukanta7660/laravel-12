@@ -2,12 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/',function(){
-    return view('user.welcome');
-});
-Route::get('about-us',function(){
-    return view('user.about');
-});
+Route::get('/','User\IndexController@index');
+Route::get('about-us','User\IndexController@about');
 
 Route::get('about-a',function(){return view('user.a');})->name('about.g');
 
