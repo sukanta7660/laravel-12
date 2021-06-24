@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','User\IndexController@index');
 Route::get('about-us','User\IndexController@about');
+Route::get('contact','User\IndexController@contact');
 
 Route::get('about-a',function(){return view('user.a');})->name('about.g');
 
