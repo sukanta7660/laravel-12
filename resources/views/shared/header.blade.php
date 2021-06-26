@@ -23,6 +23,15 @@
                   @endforeach
                 </ul>
               </li>
+              <li class="drop-down"><a href="#">Companies</a>
+                <ul>
+                @foreach ($companies as $key => $item)
+                    <li><a href="#">{{$item['name']}}</a></li>
+                @endforeach
+
+
+                </ul>
+              </li>
             </ul>
           </li>
 
