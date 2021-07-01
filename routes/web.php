@@ -15,6 +15,13 @@ Route::get('about-ab',function(){
 Route::get('master',function(){
     return view('welcome');
 });
+
+
+/*----------- Admin ---------- */
+    // Dashboard
+    Route::get('dashboard','Admin\DashboardController@index');
+/*----------- Admin ---------- */
+
   #url
   #{{url("aboutgggg")}}
   #route
