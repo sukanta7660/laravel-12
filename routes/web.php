@@ -18,8 +18,17 @@ Route::get('master',function(){
 
 
 /*----------- Admin ---------- */
-    // Dashboard
+    Route::group(['prefix' => 'admin'],function(){
+
+        // Dashboard
     Route::get('dashboard','Admin\DashboardController@index');
+
+    // services
+    Route::get('services','Admin\Service\ServiceController@index');
+    Route::get('service/create','Admin\Service\ServiceController@create');
+    Route::post('service/store','Admin\Service\ServiceController@add_service');
+
+});
 /*----------- Admin ---------- */
 
   #url

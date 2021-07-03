@@ -36,7 +36,7 @@
                with font-awesome or any other icon font library -->
                <li class="nav-header">Dashboard</li>
                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{action('Admin\DashboardController@index')}}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{action('Admin\Service\ServiceController@index')}}" class="nav-link">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>
                             Services
