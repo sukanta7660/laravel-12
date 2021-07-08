@@ -11,7 +11,8 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        return view('admin.service.service');
+        $services = Service::latest()->paginate(10);
+        return view('admin.service.service',compact('services'));
     }
 
     public function create()
@@ -40,6 +41,13 @@ class ServiceController extends Controller
         $service->decription = $description;
         $service->save();
 
-        return redirect()->back()->with('message','Success!');
+        //return redirect()->back()->with('message','Success!');
+        return redirect()->to('admin/services')->with('message','Success!');
+    }
+
+    public function delete($id)
+    {
+        Service::findOrFail($id)->delete();
+        return back()->with('message','Success!');
     }
 }

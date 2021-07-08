@@ -27,6 +27,7 @@ Route::get('master',function(){
     Route::get('services','Admin\Service\ServiceController@index');
     Route::get('service/create','Admin\Service\ServiceController@create');
     Route::post('service/store','Admin\Service\ServiceController@add_service');
+    Route::get('service/delete/{id}','Admin\Service\ServiceController@delete');
 
 });
 /*----------- Admin ---------- */

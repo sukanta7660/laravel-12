@@ -3,6 +3,11 @@
 @section('content')
 <div class="row">
     <div class="col-12">
+        @if(session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
+        @endif
       <div class="card">
         <div class="card-header">
           <h3 class="card-title"><a href="{{action('Admin\Service\ServiceController@create')}}" class="btn btn-primary btn-sm">Add a new Seervice</a></h3>
@@ -28,21 +33,28 @@
                 <th>Title</th>
                 <th>Description</th>
                 <th>Publish Date</th>
-                <th>Action</th>
+                <th class="text-right">Action</th>
               </tr>
             </thead>
             <tbody>
+                @php
+                    $i = 1;
+                @endphp
+              @foreach ($services as $item)
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
+                <td>{{$i++}}</td>
+                <td>{{$item->title}}</td>
+                <td>{{$item->decription}}</td>
+                <td>{{date('F d, Y H:i a',strtotime($item->created_at))}}</td>
+                <td class="text-right">
                     <a href="" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
-                    <a href="" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                    <a onclick="return confirm('Are you sure to delete?')" href="{{action('Admin\Service\ServiceController@delete',$item->id)}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                 </td>
+              </tr>
+              @endforeach
             </tbody>
           </table>
+          {{$services->links()}}
         </div>
         <!-- /.card-body -->
       </div>
