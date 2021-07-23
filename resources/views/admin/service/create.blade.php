@@ -25,7 +25,7 @@
         @endif
         <!-- /.card-header -->
         <!-- form start -->
-        <form method="post" action="{{action('Admin\Service\ServiceController@add_service')}}">
+        <form method="post" action="{{action('Admin\Service\ServiceController@add_service')}}" enctype="multipart/form-data">
             {{-- {{csrf_field()}} --}}
             @csrf
           <div class="card-body">
@@ -37,6 +37,14 @@
               <label>Description</label>
               <textarea name="description" class="form-control" cols="5" rows="5" placeholder="write here"></textarea>
             </div>
+            <div class="form-group">
+                <label>Image</label>
+                <input type="file" name="image" class="form-control" onchange="document.getElementById('previewImage').src = window.URL.createObjectURL(this.files[0])">
+              </div>
+
+              <div class="form-group">
+                <img id="previewImage" width="200" height="150">
+              </div>
           </div>
           <!-- /.card-body -->
 

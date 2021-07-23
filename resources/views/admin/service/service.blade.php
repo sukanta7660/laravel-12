@@ -30,6 +30,7 @@
             <thead>
               <tr>
                 <th>S/N</th>
+                <th>Image</th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Publish Date</th>
@@ -40,9 +41,15 @@
                 @php
                     $i = 1;
                 @endphp
-              @foreach ($services as $item)
+              @foreach ($services as $key => $item)
               <tr>
                 <td>{{$i++}}</td>
+                @php
+                    $path = $item->image == 'default.jpg' ? asset('default/default.jpg') : asset('uploads/services/'.$item->image);
+                @endphp
+                <td>
+                    <img src="{{$path}}" alt="" srcset="" width="50" height="30">
+                </td>
                 <td>{{$item->title}}</td>
                 <td>{{$item->decription}}</td>
                 <td>{{date('F d, Y H:i a',strtotime($item->created_at))}}</td>

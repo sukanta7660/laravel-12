@@ -22,6 +22,8 @@ class ServiceController extends Controller
 
     public function add_service(Request $dd)
     {
+        // return $dd->image->extension();
+        // dd($dd->all());
         $dd->validate([
             'title' => 'required',
             'description' => 'required'
@@ -30,6 +32,7 @@ class ServiceController extends Controller
         //query builder
         $title = $dd->title;
         $description = $dd->description;
+        $image = $dd->image;
         /*DB::table('services')->insert([
             'title' => $title,
             'decription' => $description
@@ -39,6 +42,20 @@ class ServiceController extends Controller
         $service = new Service();
         $service->title = $title;
         $service->decription = $description;
+
+        if ($dd->has('image')) {
+            $extension = $image->extension();
+            $imageName = 'IMG_'.md5(date('d-m-Y H:i:s'));
+            $imageName = $imageName.'.'.$extension;
+
+            $service->image = $imageName;
+
+            $path = public_path('uploads/services');
+
+            $image->move($path,$imageName);
+
+        }
+
         $service->save();
 
         //return redirect()->back()->with('message','Success!');
@@ -47,7 +64,17 @@ class ServiceController extends Controller
 
     public function delete($id)
     {
-        Service::findOrFail($id)->delete();
+        $service = Service::findOrFail($id);
+
+
+        $path = public_path('uploads/services/'.$service->image);
+
+        if (file_exists($path)) {
+            unlink($path);
+        }
+
+        $service->delete();
+
         return back()->with('message','Success!');
     }
 }
