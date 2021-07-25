@@ -77,4 +77,52 @@ class ServiceController extends Controller
 
         return back()->with('message','Success!');
     }
+
+    public function update_page($id)
+    {
+        $service = Service::findOrFail($id);
+        if($service){
+            return view('admin.service.update',compact('service'));
+        }
+        abort(404);
+
+    }
+
+    public function update(Request $request)
+    {
+        //dd($request->all());
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required'
+        ]);
+
+        $service = Service::findOrFail($request->id);
+        $service->title = $request->title;
+        $service->decription = $request->description;
+
+        if ($request->has('image')) {
+
+            $path = public_path('uploads/services/'.$service->image);
+
+            if (file_exists($path)) {
+                unlink($path);
+            }
+
+            $extension = $request->image->extension();
+            $imageName = 'IMG_'.md5(date('d-m-Y H:i:s'));
+            $imageName = $imageName.'.'.$extension;
+
+            $service->image = $imageName;
+
+            $path = public_path('uploads/services');
+
+            $request->image->move($path,$imageName);
+
+        }
+
+        $service->save();
+
+        return redirect()->to('admin/services')->with('message','Success!');
+
+    }
 }

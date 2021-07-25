@@ -28,7 +28,8 @@ Route::get('master',function(){
     Route::get('service/create','Admin\Service\ServiceController@create');
     Route::post('service/store','Admin\Service\ServiceController@add_service');
     Route::get('service/delete/{id}','Admin\Service\ServiceController@delete');
-
+    Route::get('service/update-page/{id}','Admin\Service\ServiceController@update_page');
+    Route::post('service/update','Admin\Service\ServiceController@update');
 });
 /*----------- Admin ---------- */
 

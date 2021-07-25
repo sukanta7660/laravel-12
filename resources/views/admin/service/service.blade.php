@@ -54,7 +54,7 @@
                 <td>{{$item->decription}}</td>
                 <td>{{date('F d, Y H:i a',strtotime($item->created_at))}}</td>
                 <td class="text-right">
-                    <a href="" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                    <a href="{{action('Admin\Service\ServiceController@update_page',$item->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
                     <a onclick="return confirm('Are you sure to delete?')" href="{{action('Admin\Service\ServiceController@delete',$item->id)}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                 </td>
               </tr>
