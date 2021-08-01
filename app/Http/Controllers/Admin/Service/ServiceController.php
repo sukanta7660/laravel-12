@@ -67,11 +67,13 @@ class ServiceController extends Controller
         $service = Service::findOrFail($id);
 
 
-        $path = public_path('uploads/services/'.$service->image);
+        //$path = public_path('uploads/services/'.$service->image);
+        $this->deleteFile('services', $service->image);
+        $service->image()->delete();
 
-        if (file_exists($path)) {
-            unlink($path);
-        }
+//        if (file_exists($path)) {
+//            unlink($path);
+//        }
 
         $service->delete();
 

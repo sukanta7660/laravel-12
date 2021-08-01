@@ -33,6 +33,7 @@
                 <th>Image</th>
                 <th>Title</th>
                 <th>Description</th>
+                <th>User</th>
                 <th>Publish Date</th>
                 <th class="text-right">Action</th>
               </tr>
@@ -52,6 +53,7 @@
                 </td>
                 <td>{{$item->title}}</td>
                 <td>{{$item->decription}}</td>
+                <td>{{$item->user->name}}</td>
                 <td>{{date('F d, Y H:i a',strtotime($item->created_at))}}</td>
                 <td class="text-right">
                     <a href="{{action('Admin\Service\ServiceController@update_page',$item->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
