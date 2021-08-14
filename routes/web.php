@@ -14,11 +14,11 @@ Route::get('about-ab',function(){
 
 Route::get('master',function(){
     return view('welcome');
-});
+})->middleware('auth');
 
 
 /*----------- Admin ---------- */
-    Route::group(['prefix' => 'admin'],function(){
+    Route::group(['prefix' => 'admin','middleware' => 'auth'],function(){
 
         // Dashboard
     Route::get('dashboard','Admin\DashboardController@index');
@@ -37,3 +37,7 @@ Route::get('master',function(){
   #{{url("aboutgggg")}}
   #route
   #{{route("about.g")}}
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

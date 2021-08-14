@@ -46,6 +46,18 @@
       </nav><!-- .nav-menu -->
 
       <a href="index.html" class="get-started-btn ml-auto">Get Started</a>
+      @auth
+      <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" class="get-started-btn ml-auto">{{Auth::user()->name}}</a>
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+      @endauth
+      @guest
+      <a href="{{route('login')}}" class="get-started-btn ml-auto">Login</a>
+      <a href="{{route('register')}}" class="get-started-btn ml-auto">Register</a>
+      @endguest
 
     </div>
   </header>
